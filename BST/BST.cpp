@@ -10,25 +10,25 @@ struct TreeNode {
 };
 
 // 查找递归实现 
-BinTree Find(ElementType X, BinTree BST) {
+BinTree Find(ElementType KEY, BinTree BST) {
 	if (!BST)  // 如果根结点为空，返回 NULL 
 		return NULL;
-	if (X < BST->Data) // 比根结点小，去左子树查找 
-		return Find(X, BST->Left);
-	else if (BST->Data < X)  // 比根结点大，去右子树查找 
-		return Find(X, BST->Right);
-	else if (BST->Data == X) // 找到了 
+	if (KEY < BST->Data) // 比根结点小，去左子树查找 
+		return Find(KEY, BST->Left);
+	else if (BST->Data < KEY)  // 比根结点大，去右子树查找 
+		return Find(KEY, BST->Right);
+	else if (BST->Data == KEY) // 找到了 
 		return BST;
 }
 
 // 查找非递归实现
-BinTree IterFind(ElementType X, BinTree BST) {
+BinTree IterFind(ElementType KEY, BinTree BST) {
 	while (BST) {
-		if (X < BST->Data)
+		if (KEY < BST->Data)
 			BST = BST->Left;
-		else if (BST->Data < X)  // 比根结点大，去右子树查找 
+		else if (BST->Data < KEY)  // 比根结点大，去右子树查找 
 			BST = BST->Right;
-		else if (BST->Data == X) // 找到了 
+		else if (BST->Data == KEY) // 找到了 
 			return BST;
 	}
 	return NULL;
@@ -71,14 +71,14 @@ BinTree Insert(ElementType KEY, BinTree BST) {//BST中不允许相等元素
 }
 
 // 删除
-BinTree Delete(ElementType X, BinTree BST) {
+BinTree Delete(ElementType KEY, BinTree BST) {
 	BinTree tmp;
 	if (!BST)
 		cout << "要删除的元素未找到";
-	else if (X < BST->Data)   // X 比当前结点值小，在左子树继续查找删除 
-		BST->Left = Delete(X, BST->Left);
-	else if (BST->Data < X)   // X 比当前结点值大，在右子树继续查找删除 
-		BST->Right = Delete(X, BST->Right);
+	else if (KEY < BST->Data)   // X 比当前结点值小，在左子树继续查找删除 
+		BST->Left = Delete(KEY, BST->Left);
+	else if (BST->Data < KEY)   // X 比当前结点值大，在右子树继续查找删除 
+		BST->Right = Delete(KEY, BST->Right);
 	else {  //  找到被删除结点 
 		if (BST->Left && BST->Right) {  // 被删除结点有俩孩子结点 
 			tmp = FindMin(BST->Right);   // 找到右子树中值最小的
