@@ -166,13 +166,13 @@ void JudBST(const BinTree&T, int &flag)//flag初值为OK
 
 
 //数据结构C习题P158
-void Print(const BinTree&T)
+void PrintElem(const BinTree&T)
 {
 	if (T)
 	{
-		Print(T->Left);
+		PrintElem(T->Left);
 		std::cout << T->Data << " ";
-		Print(T->Right);
+		PrintElem(T->Right);
 	}
 }
 
@@ -200,7 +200,7 @@ void PrintAllX(BinTree&T, ElementType&x)
 			{
 				F->Left = nullptr;//双亲与找到第一个<x节点断开 : 因为左边都是比它小的值，无需输出
 			}
-			Print(T);
+			PrintElem(T);
 		}
 	}
 }

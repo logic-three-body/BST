@@ -30,19 +30,24 @@ BinTree Find(ElementType KEY, BinTree BST) {
 }
 
 // 查找非递归实现
-BinTree IterFind(ElementType KEY, BinTree BST) {
-	while (BST) {
-		if (KEY < BST->Data)
-			BST = BST->Left;
-		else if (BST->Data < KEY)  // 比根结点大，去右子树查找 
-			BST = BST->Right;
-		else if (BST->Data == KEY) // 找到了 
+bool IterFind(ElementType KEY, BinTree BST) {
+	if (!BST)
+	{
+		return ERROR;
+	}
+	BinTree root = BST;
+	while (root) {
+		if (KEY < root->Data)
+			root = root->Left;
+		else if (root->Data < KEY)  // 比根结点大，去右子树查找 
+			root = root->Right;
+		else if (root->Data == KEY) // 找到了 
 		{
-			++BST->Count;//找到则计数加1
-			return BST;
+			++root->Count;//找到则计数加1
+			return OK;
 		}			
 	}
-	return nullptr;
+	return ERROR;
 }
 
 // 查找最小值的递归实现
@@ -104,6 +109,29 @@ BinTree Insert(ElementType KEY, BinTree BST) {//BST中不允许相等元素
 			BST->Left = Insert(KEY, BST->Left);
 		else if (BST->Data < KEY)  // 如果大，挂在右边 
 			BST->Right = Insert(KEY, BST->Right);
+		// 如果相等，什么都不用做 
+	}
+	return BST;
+}
+
+// 插入
+BinTree Insert2(BinTree& KEY, BinTree BST) {//BST中不允许相等元素
+	if (!BST) {  // 如果为空，初始化该结点 
+		BST = (BinTree)malloc(sizeof(struct TreeNode));
+		if (KEY == nullptr)
+		{
+			BST = nullptr;
+		}
+		else
+		{
+			BST = KEY;
+		}
+	}
+	else { // 不为空 
+		if (KEY->Data < BST->Data)  // 如果小，挂在左边 
+			BST->Left = Insert2(KEY, BST->Left);
+		else if (BST->Data < KEY->Data)  // 如果大，挂在右边 
+			BST->Right = Insert2(KEY, BST->Right);
 		// 如果相等，什么都不用做 
 	}
 	return BST;
@@ -194,15 +222,28 @@ void JudBST(const BinTree&T, int &flag)//flag初值为OK
 int COUNT = 0;
 ElementType Vector[100] = {0};
 //数据结构C习题P158
-void Print(const BinTree&T)
+void PrintElem(const BinTree&T)
 {
-	static int count = 0;//计数器
 	if (T)
 	{
-		Print(T->Left);
+		PrintElem(T->Left);
 		//std::cout << T->Data << " ";
 		Vector[COUNT++] = T->Data;
-		Print(T->Right);
+		PrintElem(T->Right);
+	}
+}
+
+int COUNT2 = 0;//计数器
+ElementType Vector2[100] = { 0 };
+//数据结构C习题P158
+void PrintCount(const BinTree&T)
+{
+	if (T)
+	{
+		PrintCount(T->Left);
+		//std::cout << T->Data << " ";
+		Vector[COUNT++] = T->Count;
+		PrintCount(T->Right);
 	}
 }
 
@@ -230,16 +271,38 @@ void PrintAllX(BinTree&T, ElementType&x)
 			{
 				F->Left = nullptr;//双亲与找到第一个<x节点断开 : 因为左边都是比它小的值，无需输出
 			}
-			Print(T);
+			PrintElem(T);
 			//InOrderTraversal_For_OJ(T);
 		}
 	}
 }
 
+bool ListInsert(BinTree* L, int i, BinTree e)//i为线性表位置
+{
+
+
+	if (i <= size)        /* 若插入数据位置不在表尾 */
+	{
+		for (int k = size - 1; k >= i - 1; k--)  /* 将要插入位置之后的数据元素向后移动一位 */ //此时k对应的是数组下标
+			L[k + 1] = L[k];
+	}
+	L[i - 1] = e;          /* 将新元素插入 */
+	size++;
+
+	return OK;
+}
+
+
 int main() {
 	while (true)
 	{
+		BinTree RVector[100] ;
+		for (int i = 0; i < 100; i++)
+		{
+			RVector[i] = nullptr;
+		}
 		COUNT = 0;
+		
 		for (int i = 0; i < 100; i++)
 		{
 			Vector[i] = inf;
@@ -251,31 +314,59 @@ int main() {
 			break;
 		}
 		ElementType *inp = new ElementType[size];
-		for (size_t i = 0; i < size; i++)
+		for (int i = 0; i < size; i++)
 		{
 			std::cin >> inp[i];
 		}
 		for (int i = 0; i < size; i++)
 		{
-			BST = Insert(inp[i], BST);
+			RVector[i] = new TreeNode;
+			RVector[i]->Data = inp[i];
+			RVector[i]->Count = 0;
+			RVector[i]->Left = nullptr;
+			RVector[i]->Right = nullptr;
+			BST = Insert2(RVector[i], BST);			
 		}
 		int num = 0;
 		std::cin >> num;
-		PrintAllX(BST, num);
-		//std::cout << std::endl;
-		for (int i = 0; i < COUNT; i++)
+		if (!IterFind(num, BST))
 		{
-			if (i==COUNT-1)
+			BinTree tmp = new TreeNode;
+			tmp->Count = 0;
+			tmp->Data = num;
+			tmp->Left = tmp->Right = nullptr;
+			ListInsert(RVector, num, tmp);
+			//Insert(num, BST);
+		}
+		
+		for (int i = 0; i < size; i++)
+		{
+			if (i==size-1)
 			{
-				std::cout << Vector[i] << std::endl;
+				std::cout << RVector[i]->Data<<std::endl;
 			}
 			else
 			{
-				std::cout << Vector[i] << " ";
+				std::cout << RVector[i]->Data << " ";
 			}
-
+		}
+		
+		for (int i = 0; i < size; i++)
+		{
+			if (i == size - 1)
+			{
+				std::cout << RVector[i]->Count << std::endl;
+			}
+			else
+			{
+				std::cout << RVector[i]->Count << " ";
+			}
 		}
 		delete inp;
+		for (int i = 0; i < size; i++)
+		{
+			delete RVector[i];
+		}
 
 	}
 	return 0;

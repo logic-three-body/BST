@@ -191,18 +191,17 @@ void JudBST(const BinTree&T, int &flag)//flag初值为OK
 	}
 }
 
-int COUNT = 0;
+int COUNT = 0;//计数器
 ElementType Vector[100] = { 0 };
 //数据结构C习题P158
-void Print(const BinTree&T)
+void PrintElem(const BinTree&T)
 {
-	static int count = 0;//计数器
 	if (T)
 	{
-		Print(T->Left);
+		PrintElem(T->Left);
 		//std::cout << T->Data << " ";
 		Vector[COUNT++] = T->Data;
-		Print(T->Right);
+		PrintElem(T->Right);
 	}
 }
 
@@ -230,7 +229,7 @@ void PrintAllX(BinTree&T, ElementType&x)
 			{
 				F->Left = nullptr;//双亲与找到第一个<x节点断开 : 因为左边都是比它小的值，无需输出
 			}
-			Print(T);
+			PrintElem(T);
 			//InOrderTraversal_For_OJ(T);
 		}
 	}
