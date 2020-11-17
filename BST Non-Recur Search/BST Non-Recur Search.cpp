@@ -40,7 +40,7 @@ BinTree IterFind(ElementType KEY, BinTree BST) {
 		{
 			++BST->Count;//找到则计数加1
 			return BST;
-		}
+		}			
 	}
 	return nullptr;
 }
@@ -144,16 +144,16 @@ void  InOrderTraversal_For_OJ(BinTree BT) {
 	if (BT) {
 		InOrderTraversal_For_OJ(BT->Left);  // 进入左子树 
 
-		if (count == size)
+		if (count==size)
 		{
-			std::cout << BT->Data << std::endl;
+			std::cout << BT->Data<<std::endl;
 		}
 		else
 		{
-			std::cout << BT->Data << " ";  // 打印根 
+			std::cout << BT->Data<<" ";  // 打印根 
 			++count;
 		}
-
+		
 		InOrderTraversal_For_OJ(BT->Right);  // 进入右子树 
 	}
 }
@@ -192,7 +192,7 @@ void JudBST(const BinTree&T, int &flag)//flag初值为OK
 }
 
 int COUNT = 0;
-ElementType Vector[100] = { 0 };
+ElementType Vector[100] = {0};
 //数据结构C习题P158
 void Print(const BinTree&T)
 {
@@ -244,7 +244,7 @@ int main() {
 		{
 			Vector[i] = inf;
 		}
-		BinTree BST = nullptr;
+		BinTree BST = nullptr;	
 		std::cin >> size;
 		if (!size)
 		{
@@ -265,7 +265,7 @@ int main() {
 		//std::cout << std::endl;
 		for (int i = 0; i < COUNT; i++)
 		{
-			if (i == COUNT - 1)
+			if (i==COUNT-1)
 			{
 				std::cout << Vector[i] << std::endl;
 			}

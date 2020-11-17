@@ -15,6 +15,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Print BST in Conditional wa
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Binary_Search", "Binary_Search\Binary_Search.vcxproj", "{00F193C4-DAFA-4A92-BC1D-6A9948A2B687}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BST Non-Recur Search", "BST Non-Recur Search\BST Non-Recur Search.vcxproj", "{583D7F65-9B56-4C33-8436-6FD2DAAECFE0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -71,6 +73,14 @@ Global
 		{00F193C4-DAFA-4A92-BC1D-6A9948A2B687}.Release|x64.Build.0 = Release|x64
 		{00F193C4-DAFA-4A92-BC1D-6A9948A2B687}.Release|x86.ActiveCfg = Release|Win32
 		{00F193C4-DAFA-4A92-BC1D-6A9948A2B687}.Release|x86.Build.0 = Release|Win32
+		{583D7F65-9B56-4C33-8436-6FD2DAAECFE0}.Debug|x64.ActiveCfg = Debug|x64
+		{583D7F65-9B56-4C33-8436-6FD2DAAECFE0}.Debug|x64.Build.0 = Debug|x64
+		{583D7F65-9B56-4C33-8436-6FD2DAAECFE0}.Debug|x86.ActiveCfg = Debug|Win32
+		{583D7F65-9B56-4C33-8436-6FD2DAAECFE0}.Debug|x86.Build.0 = Debug|Win32
+		{583D7F65-9B56-4C33-8436-6FD2DAAECFE0}.Release|x64.ActiveCfg = Release|x64
+		{583D7F65-9B56-4C33-8436-6FD2DAAECFE0}.Release|x64.Build.0 = Release|x64
+		{583D7F65-9B56-4C33-8436-6FD2DAAECFE0}.Release|x86.ActiveCfg = Release|Win32
+		{583D7F65-9B56-4C33-8436-6FD2DAAECFE0}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
